@@ -1,0 +1,6 @@
+model_name_or_path: llama_path
+adapter_name_or_path: saves/tuned_LLM/
+template: llama3
+finetuning_type: lora
+
+dataset: python_generation

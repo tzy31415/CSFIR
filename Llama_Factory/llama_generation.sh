@@ -1,0 +1,1 @@
+CUDA_VISIBLE_DEVICES=0 llamafactory-cli generation examples/llama_generation.yaml
