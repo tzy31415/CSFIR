@@ -40,23 +40,19 @@ def adjust_shape(tensor, target_shape):
     return tensor
 
 
-# GCN网络
 class GCN(nn.Module):
     def __init__(self, input_feat_dim, hidden_dim, output_dim, num_nodes):
         super(GCN, self).__init__()
         self.num_nodes = num_nodes
-        # 我们假设图卷积层后有一个隐含层
         self.gc1 = GraphConvolution(input_feat_dim, hidden_dim)
         self.gc2 = GraphConvolution(hidden_dim, output_dim)
 
     def forward(self, x, adj): 
         
-        # 输入维度是[批量大小, 节点数, 特征维数]
         x = x.view(-1, self.num_nodes, x.size(2))
-        # 图卷积层
         x = F.relu(self.gc1(x, adj))
         x = self.gc2(x, adj)
-        x = x.view(-1, self.num_nodes * x.size(2)) # 展平输出层，便于后续操作
+        x = x.view(-1, self.num_nodes * x.size(2)) 
         return x
     
 def resize_array(arr, new_shape=(220, 220)):

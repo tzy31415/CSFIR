@@ -64,7 +64,7 @@ class LazyBatcher(): # patch here
             scores = []
                 
 
-            passages = [self.collection[int(pid)] for pid in pids] # here patch，pids有俩元素
+            passages = [self.collection[int(pid)] for pid in pids] 
             pids_list.append(pids)
             
             

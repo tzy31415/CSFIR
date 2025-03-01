@@ -139,25 +139,7 @@ class Checkpoint(ColBERT):
         for i in sampled_pids:
             ast_list.append(resize_array(self.ast_data[i]) )
         ast_list = torch.tensor(np.array(ast_list))
-        print(ast_list.shape,'ast_list')
-        # print(len(ast_list))
-        # print(ast_list[0].shape)
-        # print((sampled_pids[0]),'sampled_pids') # 5
-        # print((docs[0]),'docs') # 代码
-        
-        
-        
-        
-        
-       
-        # print('docs:')
-        # print(len(docs))
-        # error_num = 0
-        # for i in docs:
-        #     try:
-        #         tree = ast.parse(i)
-        #     except:
-        #         error_num += 1
+
         if bsize:
             
             text_batches, reverse_indices = self.doc_tokenizer.tensorize(docs, bsize=bsize)
@@ -169,14 +151,7 @@ class Checkpoint(ColBERT):
                 returned_text = [returned_text]
 
             keep_dims_ = 'return_mask' if keep_dims == 'flatten' else keep_dims
-            # print("text_batches,here")
-            # print("-"*100)
-            # print(len(text_batches),'len(text_batches)')
-            # for i in text_batches:
-            #     print(i[0].shape, i[1].shape)
-            #     print(self.doc_tokenizer.doc_maxlen,'self.doc_tokenizer.doc_maxlen')
-            # print("text_batches, above")
-            
+           
             
             batches = [self.doc(input_ids, attention_mask, keep_dims=keep_dims_, to_cpu=to_cpu)
                        for input_ids, attention_mask in tqdm(text_batches, disable=not showprogress)]
